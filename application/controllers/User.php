@@ -16,16 +16,8 @@ class User extends CI_Controller {
    public function signup() {
       $data['title'] = "Signup";
       $this->load->view("head", $data);
-      $this->form_validation->set_rules('name', 'Name', 'required');
-      $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
-      $this->form_validation->set_rules('dob', 'Date of Birth', 'required');
-      $this->form_validation->set_rules('password', 'Password', 'required|min_length[10]');
-      $this->form_validation->set_rules('password_confirm', 'Confirm Password', 'required|matches[password]');
 
-      if($this->form_validation->run() == FALSE) {
-         $this->load->view("register");
-
-      } else if($this->form_validation->run() == TRUE) {
+      if($this->form_validation->run('user/signup') == TRUE) {
          $user = [];
          $user["name"] = $this->input->post("name");
          $user["email"] = $this->input->post("email");
