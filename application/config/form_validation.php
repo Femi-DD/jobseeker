@@ -1,7 +1,7 @@
 <?php
 
 $config = [
-	'user/signup' = [
+	'user/signup' => [
 		[
 			'field' => 'name',
 			'label' => 'Name',
