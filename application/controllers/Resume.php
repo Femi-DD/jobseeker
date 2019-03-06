@@ -45,12 +45,15 @@ class Resume extends CI_Controller {
       $this->load->view('footer');
    }
 
-   public function resume_details($id) {
-      $data['title'] = "Resume Details";
-      self::checkCompanySession();
-      $data['user'] = $this->user_model->doValueSelect('*', 'users', 'id', $id);
-      $data['user'] = $data['user'][0];
-      $data['saved_jobs'] = $this->job_model->doValueSelect('*', 'saved_jobs', 'id', $id);
+   public function resume_details($id = null) {
+      self::checkUserSession();
+      $data = [
+			'title' => "Resume Details",
+			'user' => $this->user_model->doValueSelect('*', 'users', 'id', $id),
+			'saved_jobs' => $this->job_model->doValueSelect('*', 'saved_jobs', 'id', $id);
+
+		];
+		// $data['user'] = $data['user'][0];
       $this->load->view('head', $data);
       if(!empty($data) && $data != null) {
          $this->load->view('resume_details');
@@ -60,7 +63,7 @@ class Resume extends CI_Controller {
       $this->load->view('footer');
    }
 
-   public function edit_profiles() {
+   public function edit_profiles() 	{
       self::checkUserSession();
       $data['title'] = "Edit Profile";
       $check['id'] = $this->session->userdata['user_data'][0]['id'];
